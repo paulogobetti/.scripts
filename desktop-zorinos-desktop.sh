@@ -10,16 +10,17 @@ APPS_APT_REMOVE=( snapd )
 
 APPS_APT_INSTALL=( )
 
-APPS_FLATPAK_INSTALL=( )
+APPS_FLATPAK_INSTALL=( com.github.libresprite.LibreSprite, com.obsproject.Studio, com.snes9x.Snes9x, com.unity.UnityHub, com.usebottles.bottles, com.vscodium.codium, io.github.shiftey.Desktop, io.lmms.LMMS, io.mgba.mGBA, net.blockbench.Blockbench, org.blender.Blender, org.chromium.Chromium, org.filezillaproject.Filezilla, org.mapeditor.Tiled, org.mozilla.firefox )
+
+set -e
 
 sudo rm /var/lib/dpkg/lock-frontend
 sudo rm /var/cache/apt/archives/lock
 
 sudo apt update && sudo apt upgrade -y
 
-# Habilitar suporte arquitetura x86.
+sudo dpkg --add-architecture i386
 
-# Baixar todos os apps externos (google-chrome, virtualbox, etc.)
 # Pegar última versão do VirtualBox de maneira dinâmica.
 wget https://download.virtualbox.org/virtualbox/LATEST-STABLE.TXT && RELEASE_VERSION="$(cat LATEST-STABLE.TXT)" && rm LATEST-STABLE.TXT
 
