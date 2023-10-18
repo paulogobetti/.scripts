@@ -5,5 +5,5 @@ Terminal=false
 Type=Application
 Categories=Game
 Name=Minecraft Bedrock
-Exec=/home/paulo/.apps/Minecraft-Bedrock-Launcher.AppImage
+Exec=/home/$USER/.apps/Bedrock.AppImage
 Icon=minecraft-bedrock.svg
