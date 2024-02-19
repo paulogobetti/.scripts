@@ -1,0 +1,25 @@
+# X-Content-Type-Options nosniff
+<IfModule mod_headers.c>
+	Header set X-Content-Type-Options nosniff
+</IfModule>
+
+# X-XSS-Protection
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+</IfModule>
+
+# Strict-Transport-Security
+<IfModule mod_headers.c>
+	Header set Strict-Transport-Security "max-age=31536000;"
+</IfModule>
+
+# Referrer-Policy
+<IfModule mod_headers.c>
+	Header set Referrer-Policy "same-origin"
+</IfModule>
+
+# Permissions-Policy
+<IfModule mod_headers.c>
+	Header set Permissions-Policy "accelerometer 'none' ; ambient-light-sensor 'none' ; autoplay 'none' ; camera 'none' ; encrypted-media 'none' ; fullscreen 'none' ; geolocation 'none' ; gyroscope 'none' ; magnetometer 'none' ; microphone 'none' ; midi 'none' ; payment 'none' ; speaker 'none' ; sync-xhr 'none' ; usb 'none' ; notifications 'none' ; vibrate 'none' ; push 'none' ; vr 'none' "
+</IfModule>
+
