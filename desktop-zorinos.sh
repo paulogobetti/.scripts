@@ -8,9 +8,10 @@ APPS_SNAP_REMOVE=( )
 
 APPS_APT_REMOVE=( snapd )
 
+# vlc, unrar
 APPS_APT_INSTALL=( )
 
-APPS_FLATPAK_INSTALL=( com.github.libresprite.LibreSprite, com.obsproject.Studio, com.snes9x.Snes9x, com.unity.UnityHub, com.usebottles.bottles, com.vscodium.codium, io.github.shiftey.Desktop, io.lmms.LMMS, io.mgba.mGBA, net.blockbench.Blockbench, org.blender.Blender, org.chromium.Chromium, org.filezillaproject.Filezilla, org.mapeditor.Tiled, org.mozilla.firefox )
+APPS_FLATPAK_INSTALL=( com.github.libresprite.LibreSprite, com.obsproject.Studio, com.usebottles.bottles, io.github.shiftey.Desktop, io.lmms.LMMS, org.blender.Blender, org.chromium.Chromium, org.mozilla.firefox, com.mojang.Minecraft, com.visualstudio.code, fr.natron.Natron )
 
 set -e
 
@@ -19,6 +20,7 @@ sudo rm /var/cache/apt/archives/lock
 
 sudo apt update && sudo apt upgrade -y
 
+# Habilitar suporte arquitetura x86.
 sudo dpkg --add-architecture i386
 
 # Pegar última versão do VirtualBox de maneira dinâmica.

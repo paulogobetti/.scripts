@@ -3,4 +3,3 @@
 for file in *.avif; do
     ffmpeg -i "$file" "${file%.avif}.png"
 done
-

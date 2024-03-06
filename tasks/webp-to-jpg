@@ -3,4 +3,3 @@
 for file in *.webp; do
     ffmpeg -i "$file" "${file%.webp}.jpg"
 done
-

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+DIR=$(pwd)
+
+for file in "$DIR"/*; do
+   # Verificar se o caminho é um arquivo regular.
+   if [ -f "$file" ]; then
+      # Extrair nome do arquivo.
+      file_name=$(basename "$file")
+
+      # Tratar caracteres especiais.
+      new_name=$(echo "$file_name" | tr '[:upper:]' '[:lower:]' | tr ' ' '-' | sed 's/ç/c/g; s/á/a/g; s/ó/o/g; s/é/e/g; s/í/i/g; s/ú/u/g; s/â/a/g; s/ê/e/g; s/ô/o/g; s/ã/a/g; s/õ/o/g; s/ü/u/g; s/à/a/g')
+
+      # Remover caracteres especiais.
+      new_name=$(echo "$new_name" | tr -cd '[:alnum:]._-')
+
+      # Substituir sequência de três hífens por um hífem.
+      new_name=$(echo "$new_name" | sed 's/---/-/g')
+
+      # Substituir sequência de dois hífens por um hífem.
+      new_name=$(echo "$new_name" | sed 's/--/-/g')
+
+      # Renomear o arquivo.
+      mv "$file" "$(dirname "$file")/$new_name"
+
+      echo "O arquivo $file foi renomeado para $(dirname "$file")/$new_name"
+   fi
+done
