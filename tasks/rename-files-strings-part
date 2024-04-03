@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for file in Part*; do
+    # Remove o prefixo "Part " dos nomes dos arquivos.
+    new_name="${file/Part /}"
+    
+    # Verifica se o nome do arquivo foi alterado e renomeia.
+    if [ "$file" != "$new_name" ]; then
+        mv "$file" "$new_name"
+        echo "O arquivo $file foi renomeado para $new_name"
+    fi
+done
+

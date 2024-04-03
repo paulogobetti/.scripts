@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# wget https://raw.githubusercontent.com/paulogobetti/scripts/main/desktop-zorinos-desktop.sh -O /home/$USER/install.sh && chmod +x install.sh && ./install.sh
+# wget https://raw.githubusercontent.com/paulogobetti/.scripts/main/desktop-zorinos-desktop.sh -O /home/$USER/install.sh && chmod +x install.sh && ./install.sh
 #
 # # # #
 
@@ -8,9 +8,10 @@ APPS_SNAP_REMOVE=( )
 
 APPS_APT_REMOVE=( snapd )
 
-# vlc, unrar
+# vlc, unrar, ufw, ffmpeg, ffmpegthumbnailer.
 APPS_APT_INSTALL=( )
 
+# github, libresprite, obs, bottles, lmms, blender, chromium, firefox, minecraft, vscode, natron, gnome-tweaks.
 APPS_FLATPAK_INSTALL=( com.github.libresprite.LibreSprite, com.obsproject.Studio, com.usebottles.bottles, io.github.shiftey.Desktop, io.lmms.LMMS, org.blender.Blender, org.chromium.Chromium, org.mozilla.firefox, com.mojang.Minecraft, com.visualstudio.code, fr.natron.Natron )
 
 set -e
@@ -32,25 +33,23 @@ mkdir /home/$USER/.tmp
 
 wget -r -np -nH -A "virtualbox-*_$RELEASE_VERSION*Ubuntu~focal_amd64.deb" $DOWNLOAD_LINK -O /home/$USER/.tmp/virtualbox.deb
 
+# System Config
+# Disable Cups
+sudo systemctl stop cups
+sudo systemctl disable cups
+sudo ufw deny 631/tcp
+
 # Remover snaps.
+#for
 
 # Remover snap-store/snapd.
 
-# Remover GNOME 3.
-# Instalar GNOME 4.
-# Integrar GNOME 4.
-
-# Add transparência gnome top-bar.
-
-# Add custom cursor.
-
-# Add custom icons.
-
-# Instalar GNOME Tweaks
-
+# Instalar debs.
 # Instalar flatpaks.
 
-# Instalar miniaturas.
+# Add transparência gnome top-bar.
+# Add custom cursor.
+# Add custom icons.
 
 # Configurar aliases.
 # VBoxManage

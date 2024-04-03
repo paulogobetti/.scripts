@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /wp-admin/
+
+Disallow: /cgi-bin/
+Disallow: /tag/
+Disallow: /tags/
+Disallow: /uncategorized/
+Disallow: */trackback
+
+Disallow: /*/*?s=*
+Disallow: /*/?ordr=*

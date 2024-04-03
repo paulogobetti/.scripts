@@ -1,0 +1,2 @@
+./.yt-dlp -a -i --batch-file list.txt
+

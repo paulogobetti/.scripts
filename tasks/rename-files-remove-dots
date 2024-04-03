@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Loop pelos arquivos no diretório atual
+for file in *; do
+    # Verifica se é um arquivo regular
+    if [ -f "$file" ]; then
+        # Remove os dois pontos dos nomes dos arquivos
+        new_name=$(echo "$file" | tr -d ':：')
+        
+        # Verifica se o nome do arquivo foi alterado
+        if [ "$file" != "$new_name" ]; then
+            # Renomeia o arquivo
+            mv "$file" "$new_name"
+            echo "O arquivo $file foi renomeado para $new_name"
+        fi
+    fi
+done
+
