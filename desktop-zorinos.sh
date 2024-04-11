@@ -40,7 +40,9 @@ sudo systemctl disable cups
 sudo ufw deny 631/tcp
 
 # Remover snaps.
-#for
+sudo systemctl disable snapd.socket
+sudo systemctl stop snapd.service
+sudo systemctl --kill snapd.service
 
 # Remover snap-store/snapd.
 

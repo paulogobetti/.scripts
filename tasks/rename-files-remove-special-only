@@ -5,7 +5,7 @@ for file in *; do
     # Verifica se é um arquivo regular
     if [ -f "$file" ]; then
         # Remove os dois pontos dos nomes dos arquivos
-        new_name=$(echo "$file" | tr -d ':：')
+        new_name=$(echo "$file" | tr -d ':：|｜')
         
         # Verifica se o nome do arquivo foi alterado
         if [ "$file" != "$new_name" ]; then
