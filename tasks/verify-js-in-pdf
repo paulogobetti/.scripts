@@ -1,0 +1,28 @@
+#!/bin/bash
+
+js_count=0
+
+for pdf in *.pdf; do
+   # Verifica se o arquivo existe e é regular.
+   if [ -f "$pdf" ]; then
+      info=$(pdfinfo "$pdf" 2>&1)
+
+      # Checa se há erros na saída.
+      if echo "$info" | grep -i 'error' >/dev/null; then
+         echo "Erro ao processar $pdf. Detalhes do erro:"
+         echo "$info"
+      else
+         # Verifica se contém JavaScript.
+         if echo "$info" | grep 'JavaScript: *yes' >/dev/null; then
+         echo "JavaScript encontrado em: $pdf"
+         ((js_count++))
+         fi
+      fi
+   else
+      echo "Arquivo não encontrado: $pdf"
+   fi
+done
+
+if [ $js_count -eq 0 ]; then
+   echo "Nenhum arquivo PDF com JavaScript foi encontrado."
+fi

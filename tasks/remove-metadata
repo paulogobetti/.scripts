@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Encontrar todos os arquivos PDF no diretório atual.
+find . -type f -name '*.pdf' -print0 | while IFS= read -r -d '' file
+do
+   echo "Processando: $file"
+
+   # Remover metadados do arquivo PDF
+   exiftool -all:all= -overwrite_original "$file"
+done
+
+echo "Todos os metadados foram removidos."
