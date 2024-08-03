@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Verifica se a URL foi fornecida como argumento
+if [ -z "$1" ]; then
+  echo "Uso: $0 <URL>"
+  exit 1
+fi
+
+# Define a URL do site a ser baixado
+URL=$1
+
+# Cria um diretório para armazenar o site baixado
+DIRECTORY=$(echo $URL | sed 's/https\?:\/\///' | sed 's/\/$//')
+mkdir -p $DIRECTORY
+
+# Usa wget para baixar o site completo e criar um arquivo WARC
+wget --recursive \
+     --level=inf \
+     --convert-links \
+     --adjust-extension \
+     --page-requisites \
+     --no-parent \
+     --span-hosts \
+     --domains=$(echo $URL | sed 's_https\?://__' | sed 's_/.*__') \
+     --execute robots=off \
+     --timeout=30 \
+     --tries=3 \
+     --wait=1 \
+     --user-agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
+     --directory-prefix=$DIRECTORY \
+     --warc-file=$DIRECTORY/$(basename $DIRECTORY) \
+     $URL
+
+echo "Download completo! Os arquivos foram salvos em: $DIRECTORY"
+

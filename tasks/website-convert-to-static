@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Verifica se o link foi fornecido.
+if [ -z "$1" ]; then
+  echo "Uso: $0 <URL>"
+  exit 1
+fi
+
+URL=$1
+
+# Cria um diretório temporário para armazenar os arquivos baixados.
+TEMP_DIR=$(mktemp -d)
+
+# Utiliza wget para baixar a página com todas as mídias e links convertidos para relativos.
+wget --convert-links --page-requisites --html-extension --no-parent --directory-prefix=$TEMP_DIR $URL
+
+# Navega para o diretório temporário.
+cd $TEMP_DIR
+
+# Encontra o arquivo HTML principal.
+HTML_FILE=$(find . -name "*.html" | head -n 1)
+
+# Verifica se o arquivo HTML foi encontrado.
+if [ -z "$HTML_FILE" ]; then
+  echo "Erro: arquivo HTML principal não encontrado."
+  exit 1
+fi
+
+# Extrai o conteúdo dos arquivos CSS e JS em variáveis.
+CSS_CONTENT=$(find . -name "*.css" -exec cat {} \;)
+JS_CONTENT=$(find . -name "*.js" -exec cat {} \;)
+
+# Concatena todos os arquivos em um único arquivo HTML.
+{
+  echo "<!DOCTYPE html>"
+  echo "<html>"
+  echo "<head>"
+  echo "<title>$(basename "$HTML_FILE" .html)</title>"
+  echo "<style>$CSS_CONTENT</style>"
+  echo "</head>"
+  echo "<body>"
+  cat "$HTML_FILE" | sed 's|</body>||' | sed 's|</html>||'
+  echo "<script>$JS_CONTENT</script>"
+  echo "</body>"
+  echo "</html>"
+} > final_page.html
+
+# Move o arquivo final para o diretório atual.
+mv final_page.html "$OLDPWD"
+
+# Limpa o diretório temporário.
+rm -rf $TEMP_DIR
+
+echo "Página HTML final gerada: final_page.html"
+
